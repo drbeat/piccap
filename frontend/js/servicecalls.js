@@ -1,7 +1,3 @@
-require('core-js/stable');
-require('regenerator-runtime');
-const { Promise } = require('bluebird');
-
 const availableQuirks = {
   // DILE_VT
   QUIRK_DILE_VT_CREATE_EX: '0x1',
@@ -122,6 +118,7 @@ async function getSettings() {
 
   document.getElementById('txtInputSettingsFPS').value = config.fps;
 
+  document.getElementById('txtInfoState').innerHTML = 'Loading resolution..';
   // Process Height/Width for easier selection
   switch (config.width * config.height) {
     case 57600:
@@ -144,14 +141,11 @@ async function getSettings() {
   }
 
   Object.keys(availableQuirks).forEach((quirk) => {
-    console.log(`Processing: ${quirk}`);
     const quirkval = availableQuirks[quirk];
     /* eslint-disable eqeqeq */
     if ((config.quirks & quirkval) == quirkval) {
-      console.log(`Quirk ${quirk} enabled!`);
       document.getElementById(`checkSettings${quirk}`).checked = true;
     }
-    /* eslint-enable eqeqeq */
   });
 
   document.getElementById('checkSettingsVSync').checked = config.vsync;
@@ -159,7 +153,7 @@ async function getSettings() {
 
   console.info('Done!');
   document.getElementById('txtInfoState').innerHTML = 'Settings loaded';
-  getStatus();
+  await getStatus();
 }
 
 async function statusloop(state) {
@@ -169,7 +163,6 @@ async function statusloop(state) {
     return;
   }
 
-  console.log('Starting loop to get status from background service.');
   statusRefreshStarted = true;
   while (statusRefreshStarted) {
     await wait(3000);
@@ -222,12 +215,9 @@ window.serviceSaveSettings = async () => {
 
   let quirkcalc = 0;
   Object.keys(availableQuirks).forEach((quirk) => {
-    console.log(`Processing quirk: ${quirk}`);
     const quirkval = availableQuirks[quirk];
-    console.log(`Quirk val: ${quirkval}`);
     if (document.getElementById(`checkSettings${quirk}`).checked === true) {
       quirkcalc |= quirkval;
-      console.log(`Quirkcalc: ${quirkcalc}`);
     }
   });
 
@@ -293,19 +283,15 @@ window.serviceSaveSettings = async () => {
 window.reloadHyperionLog = async () => {
   const textareaHyperionLog = document.getElementById('textareaHyperionLog');
 
-  console.log('Calling HBCHannel to get latest 200 hyperion-webos log lines.');
   const res = await asyncCall('luna://org.webosbrew.hbchannel.service/exec', { command: 'grep hyperion-webos /var/log/messages | tail -n200' });
-  console.log(`HBChannel exec returned. stderr: ${res.stderrString}`);
   textareaHyperionLog.value += `${res.stdoutString}\r\n`;
 };
 
 // Using this function to setup logging for now.
 // Future start/stop of currently not implemented hyperion-webos log method.
 window.startStopLogging = async () => {
-  console.log('Setup logging using HBChannel');
   document.getElementById('txtInfoState').innerHTML = 'Calling HBChannel for log setup';
-  const res = await asyncCall('luna://org.webosbrew.hbchannel.service/exec', { command: '/media/developer/apps/usr/palm/services/org.webosbrew.piccap.service/setuplegacylogging.sh' });
-  console.log(`HBChannel exec returned. stdout: ${res.stdoutString} stderr: ${res.stderrString}`);
+  await asyncCall('luna://org.webosbrew.hbchannel.service/exec', { command: '/media/developer/apps/usr/palm/services/org.webosbrew.piccap.service/setuplegacylogging.sh' });
 
 /*
   // Future Stuff
@@ -348,47 +334,19 @@ window.serviceReload = async () => {
 };
 
 window.tvReboot = async () => {
-  console.log('Trying to reboot TV using HBChannel..');
   document.getElementById('txtInfoState').innerHTML = 'Rebooting TV..';
-  const res = await asyncCall('luna://org.webosbrew.hbchannel.service/reboot', {});
-  console.log(res);
+  await asyncCall('luna://org.webosbrew.hbchannel.service/reboot', {});
 };
 
 async function startup() {
   await wait(2000);
 
-  // Overwrite console.log
-  const consoleLog = window.console.log;
-  /* eslint-disable func-names */
-  window.console.log = function (...args) {
-    consoleLog(...args);
-    const textareaConsoleLog = document.getElementById('textareaConsoleLog');
-    if (!textareaConsoleLog) return;
-    args.forEach((arg) => { textareaConsoleLog.value += `${JSON.stringify(arg)}\n`; });
-  };
-
-  const consoleError = window.console.error;
-  /* eslint-disable func-names */
-  window.console.error = function (...args) {
-    consoleError(...args);
-    const textareaConsoleLog = document.getElementById('textareaConsoleLog');
-    if (!textareaConsoleLog) return;
-    args.forEach((arg) => { textareaConsoleLog.value += `${JSON.stringify(arg)}\n`; });
-  };
-
-  const consoleWarn = window.console.warn;
-  /* eslint-disable func-names */
-  window.console.warn = function (...args) {
-    consoleWarn(...args);
-    const textareaConsoleLog = document.getElementById('textareaConsoleLog');
-    if (!textareaConsoleLog) return;
-    args.forEach((arg) => { textareaConsoleLog.value += `${JSON.stringify(arg)}\n`; });
-  };
-  /* eslint-enable func-names */
-
   await checkRoot();
   await getSettings();
   await getStatus();
-  statusloop();
+  await statusloop();
 }
-startup();
+
+window.addEventListener('load', () => {
+  startup();
+});

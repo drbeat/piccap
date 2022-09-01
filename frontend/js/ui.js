@@ -140,14 +140,14 @@ window.switchLog = function (location) {
   }
 };
 
-function saveLightMode(color){
-  console.log("Saving " + color + " as light mode.");
-  localStorage.setItem("lightMode", color);
+function saveLightMode(color) {
+  console.log(`Saving ${color} as light mode.`);
+  localStorage.setItem('lightMode', color);
 }
 
-function loadLightMode(){
-  const lightMode = localStorage.getItem("lightMode");
-  switchLightMode(lightMode);
+function loadLightMode() {
+  const lightMode = localStorage.getItem('lightMode');
+  window.switchLightMode(lightMode);
 }
 
 window.switchLightMode = function (color) {
@@ -155,46 +155,46 @@ window.switchLightMode = function (color) {
   const btnLightDark = document.getElementById('btnLightDark');
   const btnLightBlack = document.getElementById('btnLightBlack');
 
-  switch(color) {
-    case "blue":
+  switch (color) {
+    case 'blue':
       btnLightBlue.style.background = 'white';
       btnLightBlue.style.color = 'black';
       btnLightDark.style.background = null;
       btnLightDark.style.color = null;
       btnLightBlack.style.background = null;
       btnLightBlack.style.color = null;
-      document.querySelectorAll('.darkMode, .blackMode').forEach(elem=>elem.classList.add('blueMode'));
-      document.querySelectorAll('.darkMode').forEach(elem=>elem.classList.remove('darkMode'));
-      document.querySelectorAll('.blackMode').forEach(elem=>elem.classList.remove('blackMode'));
-      saveLightMode("blue");
+      document.querySelectorAll('.darkMode, .blackMode').forEach((elem) => elem.classList.add('blueMode'));
+      document.querySelectorAll('.darkMode').forEach((elem) => elem.classList.remove('darkMode'));
+      document.querySelectorAll('.blackMode').forEach((elem) => elem.classList.remove('blackMode'));
+      saveLightMode('blue');
       break;
-    case "dark":
+    case 'dark':
       btnLightBlue.style.background = null;
       btnLightBlue.style.color = null;
       btnLightDark.style.background = 'white';
       btnLightDark.style.color = 'black';
       btnLightBlack.style.background = null;
       btnLightBlack.style.color = null;
-      document.querySelectorAll('.blueMode, .blackMode').forEach(elem=>elem.classList.add('darkMode'));
-      document.querySelectorAll('.blueMode').forEach(elem=>elem.classList.remove('blueMode'));
-      document.querySelectorAll('.blackMode').forEach(elem=>elem.classList.remove('blackMode'));
-      saveLightMode("dark");
+      document.querySelectorAll('.blueMode, .blackMode').forEach((elem) => elem.classList.add('darkMode'));
+      document.querySelectorAll('.blueMode').forEach((elem) => elem.classList.remove('blueMode'));
+      document.querySelectorAll('.blackMode').forEach((elem) => elem.classList.remove('blackMode'));
+      saveLightMode('dark');
       break;
-    case "black":
+    case 'black':
       btnLightBlue.style.background = null;
       btnLightBlue.style.color = null;
       btnLightDark.style.background = null;
       btnLightDark.style.color = null;
       btnLightBlack.style.background = 'white';
       btnLightBlack.style.color = 'black';
-      document.querySelectorAll('.blueMode, .darkMode').forEach(elem=>elem.classList.add('blackMode'));
-      document.querySelectorAll('.blueMode').forEach(elem=>elem.classList.remove('blueMode'));
-      document.querySelectorAll('.darkMode').forEach(elem=>elem.classList.remove('darkMode'));
-      saveLightMode("black");
+      document.querySelectorAll('.blueMode, .darkMode').forEach((elem) => elem.classList.add('blackMode'));
+      document.querySelectorAll('.blueMode').forEach((elem) => elem.classList.remove('blueMode'));
+      document.querySelectorAll('.darkMode').forEach((elem) => elem.classList.remove('darkMode'));
+      saveLightMode('black');
       break;
     default:
-      console.log(color + " not found. Using blue as default.");
-      switchLightMode('blue');
+      console.log(`${color} not found. Using blue as default.`);
+      window.switchLightMode('blue');
       break;
   }
 };

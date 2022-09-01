@@ -3,11 +3,13 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    'all': [
+    all: [
+      'core-js/stable',
       path.resolve(__dirname, './frontend/js/ui.js'),
       path.resolve(__dirname, './frontend/js/servicecalls.js'),
-      path.resolve(__dirname, './frontend/js/spatial-navigation.js'),
-    ]
+      path.resolve(__dirname, './frontend/js/domrect-polyfill.js'),
+      'spatial-navigation-polyfill',
+    ],
   },
   target: 'browserslist',
   mode: 'production',
@@ -30,7 +32,7 @@ module.exports = {
     filename: './[name].bundled.js',
   },
   performance: {
-    maxAssetSize: 1000000
+    maxAssetSize: 1000000,
   },
   plugins: [
     new CopyPlugin({
