@@ -3,18 +3,20 @@
   "version": "0.4.3",
   "description": "PicCap - Hyperion Sender App",
   "main": "index.html",
+  "type": "module",
   "scripts": {
     "lint-frontend": "eslint frontend/js/",
     "lint-frontend-fix": "eslint --fix frontend/js/",
     "lint-backend": "cd ./hyperion-webos && python lint/run-clang-format.py --extensions \"c,h,cpp\" --color auto --recursive ./src",
     "lint-backend-fix": "cd ./hyperion-webos && python lint/run-clang-format.py --extensions \"c,h,cpp\" --color auto --recursive --inplace true ./src",
-    "clean": "rm -rf ./build/*; rm -rf ./hyperion-webos/build/*",
-    "build-frontend": "mkdir -p ./build/piccap-frontend && webpack",
+    "clean": "rimraf ./build/* && rimraf ./hyperion-webos/build/*",
+    "build-frontend": "vite build",
     "build-backend": "mkdir -p ./build/hyperion-webos && mkdir -p ./hyperion-webos/build && cd ./hyperion-webos/build && cmake .. && make hyperion-webos gm_backend halgal_backend dile_vt_backend vtcapture_backend && cd ../.. && cp ./hyperion-webos/build/hyperion-webos ./build/hyperion-webos/ && cp ./hyperion-webos/build/libdile_vt_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libgm_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libhalgal_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libvtcapture_backend.so ./build/hyperion-webos/ && cp ./servicefiles/* ./build/hyperion-webos && chmod +x ./build/hyperion-webos/hyperion-webos ./build/hyperion-webos/piccapautostart",
-    "build-all": "mkdir -p ./build/piccap-frontend && webpack && mkdir -p ./build/hyperion-webos && mkdir -p ./hyperion-webos/build && cd ./hyperion-webos/build && cmake .. && make && cd ../.. && cp ./hyperion-webos/build/hyperion-webos ./build/hyperion-webos/ && cp ./hyperion-webos/build/libdile_vt_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libgm_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libhalgal_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libvtcapture_backend.so ./build/hyperion-webos/ && cp ./servicefiles/* ./build/hyperion-webos && chmod +x ./build/hyperion-webos/hyperion-webos ./build/hyperion-webos/piccapautostart",
+    "build-all": "vite build && mkdir -p ./build/hyperion-webos && mkdir -p ./hyperion-webos/build && cd ./hyperion-webos/build && cmake .. && make && cd ../.. && cp ./hyperion-webos/build/hyperion-webos ./build/hyperion-webos/ && cp ./hyperion-webos/build/libdile_vt_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libgm_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libhalgal_backend.so ./build/hyperion-webos/ && cp ./hyperion-webos/build/libvtcapture_backend.so ./build/hyperion-webos/ && cp ./servicefiles/* ./build/hyperion-webos && chmod +x ./build/hyperion-webos/hyperion-webos ./build/hyperion-webos/piccapautostart",
     "package": "ares-package ./build/piccap-frontend ./build/hyperion-webos -o ./build",
     "deploy": "ares-install org.webosbrew.piccap_${npm_package_version}_all.ipk",
-    "launch": "ares-launch org.webosbrew.piccap"
+    "launch": "ares-launch org.webosbrew.piccap",
+    "dev": "vite serve"
   },
   "browserslist": [
     "chrome 38"
@@ -22,24 +24,19 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/preset-env": "^7.18.10",
-    "bluebird": "^3.7.2",
-    "core-js": "^3.24.1",
-    "regenerator-runtime": "^0.13.9",
-    "webos-service": "git+https://github.com/webosose/nodejs-module-webos-service.git"
+    "core-js": "^3.37.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.18.10",
-    "@babel/core": "^7.18.10",
-    "@babel/runtime-corejs3": "^7.18.9",
-    "@webosose/ares-cli": "^2.3.1",
-    "babel-loader": "^8.2.5",
-    "copy-webpack-plugin": "^10.2.4",
-    "eslint": "^8.22.0",
+    "@vitejs/plugin-legacy": "^5.4.1",
+    "@vitejs/plugin-react": "^4.3.1",
+    "@webosose/ares-cli": "^2.4.0",
+    "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-compat": "^4.0.2",
-    "eslint-plugin-import": "^2.26.0",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0"
+    "eslint-plugin-compat": "^4.2.0",
+    "eslint-plugin-import": "^2.29.1",
+    "rimraf": "^5.0.7",
+    "terser": "^5.31.1",
+    "vite": "^5.3.1",
+    "vite-plugin-static-copy": "^1.0.5"
   }
 }

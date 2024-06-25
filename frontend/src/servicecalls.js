@@ -1,5 +1,3 @@
-require('core-js/stable');
-
 const availableQuirks = {
   // DILE_VT
   QUIRK_DILE_VT_CREATE_EX: '0x1',
