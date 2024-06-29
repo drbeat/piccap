@@ -2,7 +2,7 @@
   "name": "org.webosbrew.piccap",
   "version": "0.4.3",
   "description": "PicCap - Hyperion Sender App",
-  "main": "index.html",
+  "main": "frontend/src/index.ts",
   "type": "module",
   "scripts": {
     "lint-frontend": "eslint ./frontend/src/",
@@ -23,14 +23,16 @@
       "browser": true
     },
     "extends": [
-      "airbnb-base",
-      "plugin:compat/recommended"
+      "plugin:react/recommended",
+      "airbnb",
+      "airbnb-typescript"
     ],
-    "overrides": [
-    ],
+    "parser": "@typescript-eslint/parser",
+    "overrides": [],
     "parserOptions": {
       "ecmaVersion": "latest",
-      "sourceType": "module"
+      "sourceType": "module",
+      "project": "./tsconfig.json"
     },
     "rules": {
       "no-console": 0,
@@ -45,18 +47,27 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "core-js": "^3.37.1"
+    "@reduxjs/toolkit": "^2.2.5",
+    "core-js": "^3.37.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-redux": "^9.1.2"
   },
   "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.14.1",
     "@vitejs/plugin-legacy": "^5.4.1",
     "@vitejs/plugin-react": "^4.3.1",
     "@webosose/ares-cli": "^2.4.0",
     "eslint": "^8.57.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-compat": "^4.2.0",
-    "eslint-plugin-import": "^2.29.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-plugin-react": "^7.34.3",
     "rimraf": "^5.0.7",
     "terser": "^5.31.1",
+    "typescript": "^5.5.2",
     "vite": "^5.3.1",
     "vite-plugin-static-copy": "^1.0.5"
   }
