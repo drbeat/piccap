@@ -22,7 +22,7 @@ jobs:
         
     - uses: actions/setup-node@v3
       with:
-         node-version: 18
+         node-version: 20
 
     - name: Install webOS CLI
       run: sudo npm install --location=global @webosose/ares-cli
@@ -57,7 +57,7 @@ jobs:
       run: find . && find ./build
 
     - name: Upload PicCap IPK
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: piccap_ipk
         path: ./build/*.ipk
