@@ -4,12 +4,13 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 import { defineConfig, normalizePath } from 'vite'
 
 export default defineConfig({
-  base: './',
+  root: './frontend',
+  publicDir: '../public',
   plugins: [
     viteStaticCopy({
         targets: [
           {
-            src: './frontend/public/*',
+            src: './public/*',
             dest: '.',
           }
         ]
@@ -21,12 +22,13 @@ export default defineConfig({
   build: {
     rollupOptions: {
         input: [
-            normalizePath(path.resolve(__dirname, './frontend/src/index.ts')),
+            normalizePath(path.resolve(__dirname, './frontend/index.html')),
         ],
         output: {
-            entryFileNames: 'assets/[name].js',
+            entryFileNames: 'js/[name].js',
         },
     },
     outDir: normalizePath(path.resolve(__dirname, './build/piccap-frontend/')),
+    emptyOutDir: true,
   },
 })
