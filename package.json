@@ -25,7 +25,8 @@
     "extends": [
       "plugin:react/recommended",
       "airbnb",
-      "airbnb-typescript"
+      "airbnb-typescript",
+      "plugin:react/jsx-runtime"
     ],
     "parser": "@typescript-eslint/parser",
     "overrides": [],
@@ -56,8 +57,8 @@
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.14.1",
-    "@typescript-eslint/parser": "^7.14.1",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/parser": "^7.15.0",
     "@vitejs/plugin-legacy": "^5.4.1",
     "@vitejs/plugin-react": "^4.3.1",
     "@webosose/ares-cli": "^2.4.0",
@@ -71,8 +72,8 @@
     "rimraf": "^5.0.7",
     "tailwindcss": "^3.4.4",
     "terser": "^5.31.1",
-    "typescript": "^5.5.2",
-    "vite": "^5.3.2",
-    "vite-plugin-static-copy": "^1.0.5"
+    "typescript": "^5.5.3",
+    "vite": "^5.3.3",
+    "vite-plugin-static-copy": "^1.0.6"
   }
 }
