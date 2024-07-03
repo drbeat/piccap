@@ -2,7 +2,7 @@
   "name": "org.webosbrew.piccap",
   "version": "0.4.3",
   "description": "PicCap - Hyperion Sender App",
-  "main": "frontend/src/index.ts",
+  "main": "frontend/src/index.tsx",
   "type": "module",
   "scripts": {
     "lint-frontend": "eslint ./frontend/src/",
@@ -47,7 +47,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@reduxjs/toolkit": "^2.2.5",
+    "@reduxjs/toolkit": "^2.2.6",
     "core-js": "^3.37.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -61,14 +61,18 @@
     "@vitejs/plugin-legacy": "^5.4.1",
     "@vitejs/plugin-react": "^4.3.1",
     "@webosose/ares-cli": "^2.4.0",
+    "autoprefixer": "^10.4.19",
+    "daisyui": "^4.12.10",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-plugin-react": "^7.34.3",
+    "postcss": "^8.4.39",
     "rimraf": "^5.0.7",
+    "tailwindcss": "^3.4.4",
     "terser": "^5.31.1",
     "typescript": "^5.5.2",
-    "vite": "^5.3.1",
+    "vite": "^5.3.2",
     "vite-plugin-static-copy": "^1.0.5"
   }
 }
