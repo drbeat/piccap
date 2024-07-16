@@ -11,6 +11,11 @@ export enum EnumTheme {
   DARK = 'darkMode',
 }
 
+export enum EnumLogs {
+  PICCAP = 'piccap',
+  HYPERION = 'hyperion',
+}
+
 export enum EnumQuirks {
   // DILE_VT
   QUIRK_DILE_VT_CREATE_EX = '0x1',

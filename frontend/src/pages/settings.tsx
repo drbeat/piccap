@@ -1,6 +1,6 @@
 function Settings() {
   return (
-    <div id="settings" className="settings">
+    <div className="h-full py-2">
       <div className="settingItems settingItemsNormal" id="settingItemsNormal">
         <ul>
           <li><p><b>Service settings</b></p></li>

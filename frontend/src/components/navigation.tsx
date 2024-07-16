@@ -18,15 +18,6 @@ function Navigation(
             <button
               type="button"
               className="btn btn-lg btn-ghost"
-              onClick={() => viewHandle(EnumPages.SERVICE)}
-            >
-              Service
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className="btn btn-lg btn-ghost"
               onClick={() => viewHandle(EnumPages.SETTINGS)}
             >
               Settings

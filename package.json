@@ -57,8 +57,8 @@
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.15.0",
-    "@typescript-eslint/parser": "^7.15.0",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
     "@vitejs/plugin-legacy": "^5.4.1",
     "@vitejs/plugin-react": "^4.3.1",
     "@webosose/ares-cli": "^2.4.0",
@@ -67,13 +67,13 @@
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
-    "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-react": "^7.34.4",
     "postcss": "^8.4.39",
-    "rimraf": "^5.0.7",
-    "tailwindcss": "^3.4.4",
-    "terser": "^5.31.1",
+    "rimraf": "^5.0.9",
+    "tailwindcss": "^3.4.6",
+    "terser": "^5.31.3",
     "typescript": "^5.5.3",
-    "vite": "^5.3.3",
+    "vite": "^5.3.4",
     "vite-plugin-static-copy": "^1.0.6"
   }
 }
