@@ -5,7 +5,7 @@ function Logs() {
   const [logView, setLogView] = useState(EnumLogs.PICCAP);
 
   return (
-    <div className="h-full py-2">
+    <>
       <div role="alert" className="alert alert-info">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ function Logs() {
           <textarea className="textarea textarea-primary w-full" rows={15} />
         </div>
       )}
-    </div>
+    </>
   );
 }
 
